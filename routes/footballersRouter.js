@@ -3,25 +3,21 @@ const footballersController = require('../controlers/footballersController');
 
 const footballersRouter  = express.Router();
 
-
 footballersRouter.get('/', async (request, response) => {
     const footballersList=await footballersController.getFootballers();
     response.send(footballersList.data);
 });
-
-
 
 footballersRouter.get('/allWinners', async (request, response) => {
     const footballersUnicList=await footballersController.getUnicFootballers();
     response.send(footballersUnicList);
 });
 
-footballersRouter.get(`/PlayerInfo`, async (request,response) =>{
+footballersRouter.get(`/playerInfo`, async (request,response) =>{
     const {data: playersList}= await footballersController.getFootballers();
     const playerSearch=request.query.player;
     response.send(await footballersController.playerInfo(playersList,playerSearch));
 });
-
 
 footballersRouter.get(`/mostGoals`,async (request,response) =>{
 
@@ -36,12 +32,10 @@ footballersRouter.get(`/mostWinner`, async (request,response)  =>{
 
 })
 
-
 footballersRouter.get(`/youngPlayer`,async (request,response) => {
     const {data: footballersList} = await footballersController.getFootballers();
     response.send(await footballersController.youngPlayer(footballersList));
 });
-
 
 footballersRouter.get(`/titlesSort`, async (request,response) =>{
     const {data: playersList}= await footballersController.getFootballers();
